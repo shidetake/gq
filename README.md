@@ -90,7 +90,7 @@ Options:
     "total_points": 1342,
     "segment_distance_km": 1.0,
     "total_elevation_gain_m": 2881.4,
-    "total_elevation_loss_m": 2881.0,
+    "total_elevation_loss_m": -2881.0,
     "min_elevation_m": 171.1,
     "max_elevation_m": 1098.9
   },
@@ -101,7 +101,7 @@ Options:
       "end_km": 1.0,
       "distance_km": 1.0,
       "elevation_gain_m": 70.7,
-      "elevation_loss_m": 19.2,
+      "elevation_loss_m": -19.2,
       "net_elevation_m": 51.6,
       "start_elevation_m": 251.3,
       "end_elevation_m": 302.9,
@@ -115,8 +115,8 @@ Options:
 
 ```csv
 segment,start_km,end_km,distance_km,elevation_gain_m,elevation_loss_m,net_elevation_m,start_elevation_m,end_elevation_m,point_count
-1,0.000,1.000,1.000,70.7,19.2,51.6,251.3,302.9,38
-2,1.000,2.000,1.000,271.3,28.1,243.3,302.6,545.8,60
+1,0.000,1.000,1.000,70.7,-19.2,51.6,251.3,302.9,38
+2,1.000,2.000,1.000,271.3,-28.1,243.3,302.6,545.8,60
 ```
 
 ## Development

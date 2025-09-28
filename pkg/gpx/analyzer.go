@@ -99,7 +99,7 @@ func calculateMetadata(points []Point, totalDistance, segmentDistance float64) M
 		TotalPoints:         len(points),
 		SegmentDistanceKm:   segmentDistance,
 		TotalElevationGainM: totalGain,
-		TotalElevationLossM: totalLoss,
+		TotalElevationLossM: -totalLoss,
 		MinElevationM:       minElev,
 		MaxElevationM:       maxElev,
 	}
@@ -195,7 +195,7 @@ func calculateSegmentElevation(points []Point, distances []float64, startKm, end
 		EndKm:           actualEndKm,
 		DistanceKm:      actualEndKm - startKm,
 		ElevationGainM:  elevationGain,
-		ElevationLossM:  elevationLoss,
+		ElevationLossM:  -elevationLoss,
 		NetElevationM:   elevationGain - elevationLoss,
 		StartElevationM: startElevation,
 		EndElevationM:   endElevation,

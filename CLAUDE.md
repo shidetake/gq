@@ -77,9 +77,9 @@ This is a command-line GPX (GPS Exchange Format) analysis tool that processes GP
 The analyzer divides GPS tracks into equal distance segments (e.g., 1km each) regardless of point density. When segment boundaries don't align with actual GPS points, the system interpolates coordinate and elevation data to create precise segment start/end points.
 
 #### Elevation Calculations
-- **Gain**: Sum of positive elevation changes between consecutive points
-- **Loss**: Sum of negative elevation changes (converted to positive values)
-- **Net**: Gain minus loss for each segment
+- **Gain**: Sum of positive elevation changes between consecutive points (positive values)
+- **Loss**: Sum of negative elevation changes (output as negative values)
+- **Net**: Gain + loss for each segment (since loss is already negative)
 
 ### Testing and Sample Data
 - Sample GPX file: `sample/ikpht-long-new.gpx`
