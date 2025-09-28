@@ -32,5 +32,5 @@ jobs:
     - name: Test with sample data
       run: |
         ./gq --help
-        ./gq sample/ikpht-long-new.gpx --csv | head -5
-        ./gq -d 0.5 sample/ikpht-long-new.gpx --csv | head -3
+        ./gq sample/ikpht-long-new.gpx --format csv | head -5
+        ./gq -d 0.5 sample/ikpht-long-new.gpx -f csv | head -3

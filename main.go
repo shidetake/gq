@@ -25,7 +25,7 @@ func run() error {
 	args := os.Args[1:]
 
 	if len(args) == 0 {
-		return fmt.Errorf("usage: gq [options] [file]\n\nOptions:\n  -c, --csv           Output in CSV format\n  -d, --distance NUM  Segment distance in km (default: %.1f)\n  -C, --compact       Compact JSON output\n  -h, --help          Show help", DefaultSegmentDistance)
+		return fmt.Errorf("usage: gq [options] [file]\n\nOptions:\n  -f, --format FORMAT Output format: json, csv (default: json)\n  -d, --distance NUM  Segment distance in km (default: %.1f)\n  -h, --help          Show help", DefaultSegmentDistance)
 	}
 
 	// Parse arguments
@@ -42,9 +42,23 @@ func run() error {
 		case "-h", "--help":
 			showHelp = true
 		case "-c", "--csv":
+			// Deprecated: use --format csv instead
+			fmt.Fprintf(os.Stderr, "Warning: -c/--csv is deprecated, use --format csv instead\n")
 			format = output.FormatCSV
-		case "-C", "--compact":
-			format = output.FormatCompactJSON
+		case "-f", "--format":
+			if i+1 < len(args) {
+				switch args[i+1] {
+				case "json":
+					format = output.FormatJSON
+				case "csv":
+					format = output.FormatCSV
+				default:
+					return fmt.Errorf("unsupported format: %s (supported: json, csv)", args[i+1])
+				}
+				i++ // Skip the next argument since it's the format value
+			} else {
+				return fmt.Errorf("format flag requires a value")
+			}
 		case "-d", "--distance":
 			if i+1 < len(args) {
 				if dist, err := strconv.ParseFloat(args[i+1], 64); err == nil && dist > 0 {
@@ -69,15 +83,15 @@ func run() error {
 		fmt.Printf("gq - GPX Query Tool\n\n")
 		fmt.Printf("Usage: gq [options] [file]\n\n")
 		fmt.Printf("Options:\n")
-		fmt.Printf("  -c, --csv           Output in CSV format\n")
+		fmt.Printf("  -f, --format FORMAT Output format: json, csv (default: json)\n")
 		fmt.Printf("  -d, --distance NUM  Segment distance in km (default: %.1f)\n", DefaultSegmentDistance)
-		fmt.Printf("  -C, --compact       Compact JSON output\n")
 		fmt.Printf("  -h, --help          Show help\n\n")
 		fmt.Printf("Examples:\n")
 		fmt.Printf("  gq route.gpx                    # Analyze with 1km segments (JSON)\n")
-		fmt.Printf("  gq -c route.gpx                 # Output in CSV format\n")
-		fmt.Printf("  gq -d 0.5 --csv route.gpx      # 500m segments in CSV\n")
-		fmt.Printf("  cat route.gpx | gq -c           # Read from stdin\n")
+		fmt.Printf("  gq --format csv route.gpx       # Output in CSV format\n")
+		fmt.Printf("  gq -f csv route.gpx             # Output in CSV format (short)\n")
+		fmt.Printf("  gq -d 0.5 -f csv route.gpx     # 500m segments in CSV\n")
+		fmt.Printf("  cat route.gpx | gq -f csv       # Read from stdin\n")
 		return nil
 	}
 

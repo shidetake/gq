@@ -59,7 +59,7 @@ lint:
 # Run with sample data
 demo: build
 	@echo "Running demo with sample data..."
-	./$(BINARY_NAME) --csv sample/ikpht-long-new.gpx
+	./$(BINARY_NAME) --format csv sample/ikpht-long-new.gpx
 
 # Show available targets
 help:

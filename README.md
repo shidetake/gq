@@ -59,16 +59,13 @@ make build
 gq route.gpx
 
 # Output in CSV format
-gq --csv route.gpx
+gq --format csv route.gpx
 
 # Use 500m segments
-gq -d 0.5 --csv route.gpx
+gq -d 0.5 --format csv route.gpx
 
 # Read from stdin
-cat route.gpx | gq --csv
-
-# Compact JSON output
-gq --compact route.gpx
+cat route.gpx | gq --format csv
 ```
 
 ### Command Line Options
@@ -77,9 +74,8 @@ gq --compact route.gpx
 Usage: gq [options] [file]
 
 Options:
-  -c, --csv           Output in CSV format
+  -f, --format FORMAT Output format: json, csv (default: json)
   -d, --distance NUM  Segment distance in km (default: 1.0)
-  -C, --compact       Compact JSON output
   -h, --help          Show help
 ```
 

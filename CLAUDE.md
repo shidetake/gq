@@ -62,14 +62,14 @@ This is a command-line GPX (GPS Exchange Format) analysis tool that processes GP
 
 #### `pkg/output/` - Output Formatting
 - **`formatter.go`**: Multiple output format support
-  - JSON (pretty and compact)
+  - JSON (formatted with indentation)
   - CSV with standard headers
   - Configurable precision for different data types
 
 #### Root Directory - CLI Interface
 - **`main.go`**: Command-line argument parsing and application orchestration
   - Supports stdin input for pipeline operations
-  - Flag parsing for format and segment distance options
+  - Flag parsing for --format and --distance options
 
 ### Key Algorithms
 

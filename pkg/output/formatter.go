@@ -15,15 +15,12 @@ type Format int
 const (
 	FormatJSON Format = iota
 	FormatCSV
-	FormatCompactJSON
 )
 
 func FormatResult(result *gpx.AnalysisResult, format Format, writer io.Writer) error {
 	switch format {
 	case FormatJSON:
-		return formatJSON(result, writer, true)
-	case FormatCompactJSON:
-		return formatJSON(result, writer, false)
+		return formatJSON(result, writer)
 	case FormatCSV:
 		return formatCSV(result, writer)
 	default:
@@ -31,11 +28,9 @@ func FormatResult(result *gpx.AnalysisResult, format Format, writer io.Writer) e
 	}
 }
 
-func formatJSON(result *gpx.AnalysisResult, writer io.Writer, pretty bool) error {
+func formatJSON(result *gpx.AnalysisResult, writer io.Writer) error {
 	encoder := json.NewEncoder(writer)
-	if pretty {
-		encoder.SetIndent("", "  ")
-	}
+	encoder.SetIndent("", "  ")
 	return encoder.Encode(result)
 }
 
