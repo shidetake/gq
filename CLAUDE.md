@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 make build          # Build for current platform (creates ./gq binary)
 make build-all      # Build for all platforms (outputs to build/ directory)
-go build ./cmd/gq   # Direct go build
+go build            # Direct go build
 ```
 
 ### Testing
@@ -66,7 +66,7 @@ This is a command-line GPX (GPS Exchange Format) analysis tool that processes GP
   - CSV with standard headers
   - Configurable precision for different data types
 
-#### `cmd/gq/` - CLI Interface
+#### Root Directory - CLI Interface
 - **`main.go`**: Command-line argument parsing and application orchestration
   - Supports stdin input for pipeline operations
   - Flag parsing for format and segment distance options
@@ -88,6 +88,6 @@ The analyzer divides GPS tracks into equal distance segments (e.g., 1km each) re
 
 ### Build Configuration
 - **Target Go Version**: 1.25.1 (go.mod), CI uses 1.21
-- **Main Entry Point**: `cmd/gq/main.go`
+- **Main Entry Point**: `main.go`
 - **Binary Name**: `gq`
 - **Cross-Platform Builds**: Linux, macOS (Intel/ARM), Windows
